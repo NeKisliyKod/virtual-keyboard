@@ -76,7 +76,9 @@ export function keyKlickEffect(key, content) {
 }
 
 export function keyMouseDownEffect(key) {
-  key.classList.add('active')
+  if (key.className.includes('CapsLock')){
+    key.classList.toggle('active')
+  } else key.classList.add('active')
 }
 
 export function keyUnactivator(key) {

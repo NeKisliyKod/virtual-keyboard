@@ -64,10 +64,15 @@ document.addEventListener('keydown', function (event) {
     }
   }
 
-  if (event.code == 'ShiftLeft' || event.code == 'ShiftRight') {
+  if (event.code == 'CapsLock') {
+    let capsBtn = document.querySelector('#CapsLock');
+    if (capsBtn.className.includes('active')) {
+      btnVariablesSwither(allVariables, 'caps');
+    } else btnVariablesSwither(allVariables, 'lower');
+  }
+
+  if (event.code.includes('Shift')) {
     btnVariablesSwither(allVariables, 'upper');
-  } else if (event.code == 'CapsLock') {
-    btnVariablesSwither(allVariables, 'caps');
   }
 
   if ((event.key == 'Alt' && event.ctrlKey) || (event.key == 'Control' && event.altKey)) {
@@ -80,7 +85,7 @@ document.addEventListener('keydown', function (event) {
 
 document.addEventListener('keyup', (event) => {
   for (let i = 0; i < keys.length; i++) {
-    if (keys[i].className.includes(event.code)) {
+    if (keys[i].className.includes(event.code) && event.code !== 'CapsLock') {
       keyUnactivator(keys[i]);
     }
   }
@@ -88,4 +93,5 @@ document.addEventListener('keyup', (event) => {
   if (event.code == 'ShiftLeft' || event.code == 'ShiftRight') {
     btnVariablesSwither(allVariables, 'lower');
   }
+
 })
